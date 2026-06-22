@@ -1,0 +1,83 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+    <meta charset="utf-8">
+    <title>Entity Relationship Diagram (ERD)</title>
+    <style>
+        body { font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.5; }
+        h1, h2, h3 { text-align: left; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; text-align: center; }
+        p.indent { text-indent: 1.5cm; text-align: justify; }
+        .placeholder { width: 100%; height: 300px; border: 2px dashed #ccc; text-align: center; line-height: 300px; color: #888; font-style: italic; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <h2>3.X. Entity Relationship Diagram (ERD)</h2>
+    <p class="indent"><i>Entity Relationship Diagram</i> (ERD) merupakan model data berupa notasi grafis dalam pemodelan data konseptual yang menggambarkan hubungan antara penyimpan. Berikut adalah penggambaran ERD dari sistem absensi yang dirancang:</p>
+    
+    <div class="placeholder">
+        [TEMPATKAN GAMBAR ERD DARI VISIO / DRAW.IO DI SINI]
+    </div>
+
+    <p style="text-align: center;"><b>Gambar 3.X. Entity Relationship Diagram Sistem Absensi</b></p>
+    <br>
+
+    <p class="indent">Berdasarkan gambar ERD di atas, entitas dan relasi yang terbentuk dalam sistem dijabarkan dalam tabel relasi antar entitas sebagai berikut:</p>
+
+    <h3>Tabel 3.X. Relasi Antar Entitas</h3>
+    <table>
+        <tr>
+            <th>Entitas 1</th>
+            <th>Relasi</th>
+            <th>Entitas 2</th>
+            <th>Kardinalitas</th>
+            <th>Keterangan</th>
+        </tr>
+        <tr>
+            <td>Users</td>
+            <td>Memiliki Peran Sebagai</td>
+            <td>Homeroom Teachers</td>
+            <td>1 to 1 (One-to-One)</td>
+            <td>Satu akun pengguna (user) mewakili maksimal satu profil wali kelas.</td>
+        </tr>
+        <tr>
+            <td>Classes</td>
+            <td>Dikepalai Oleh</td>
+            <td>Homeroom Teachers</td>
+            <td>1 to 1 (One-to-One)</td>
+            <td>Satu kelas hanya diampu oleh satu wali kelas utama.</td>
+        </tr>
+        <tr>
+            <td>Classes</td>
+            <td>Memiliki</td>
+            <td>Students</td>
+            <td>1 to N (One-to-Many)</td>
+            <td>Satu kelas menampung banyak siswa, dan satu siswa hanya terdaftar di satu kelas.</td>
+        </tr>
+        <tr>
+            <td>Students</td>
+            <td>Melakukan</td>
+            <td>Absences</td>
+            <td>1 to N (One-to-Many)</td>
+            <td>Satu siswa dapat melakukan banyak pencatatan absensi (setiap hari), tetapi satu record absensi hanya milik satu siswa.</td>
+        </tr>
+        <tr>
+            <td>Students</td>
+            <td>Mengajukan</td>
+            <td>Izin Requests</td>
+            <td>1 to N (One-to-Many)</td>
+            <td>Satu siswa dapat mengajukan beberapa surat izin/sakit, namun satu surat izin hanya milik satu siswa.</td>
+        </tr>
+        <tr>
+            <td>Parents</td>
+            <td>Memiliki Anak</td>
+            <td>Students</td>
+            <td>M to N (Many-to-Many)</td>
+            <td>Satu orang tua dapat memiliki lebih dari satu anak (siswa), dan satu siswa dapat dihubungkan dengan dua orang tua (Ayah/Ibu).</td>
+        </tr>
+    </table>
+
+</body>
+</html>

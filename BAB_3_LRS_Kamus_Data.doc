@@ -1,0 +1,112 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+    <meta charset="utf-8">
+    <title>LRS dan Kamus Data</title>
+    <style>
+        body { font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.5; }
+        h1, h2, h3 { text-align: left; }
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; text-align: center; }
+        .pk { font-weight: bold; text-decoration: underline; }
+        .fk { font-style: italic; }
+        p.indent { text-indent: 1.5cm; text-align: justify; }
+    </style>
+</head>
+<body>
+
+    <h2>3.X. Logical Record Structure (LRS)</h2>
+    <p class="indent"><i>Logical Record Structure</i> (LRS) merupakan representasi dari struktur record-record pada tabel-tabel yang terbentuk dari hasil pemetaan diagram ER. Berikut adalah struktur LRS dari sistem absensi ini. Atribut dengan garis bawah (<u>Underline</u>) merupakan <i>Primary Key</i> (PK), dan atribut yang dicetak miring (<i>Italic</i>) merupakan <i>Foreign Key</i> (FK).</p>
+    
+    <ul>
+        <li><b>users</b> (<u>id</u>, name, email, password, role, is_approved, email_verified_at, created_at, updated_at)</li>
+        <li><b>classes</b> (<u>id</u>, name, grade, major, description, status, dismissal_time, created_at, updated_at)</li>
+        <li><b>students</b> (<u>id</u>, <i>class_id</i>, nisn, name, rfid_uid, gender, status, address, email, birth_place, birth_date, photo, created_at, updated_at)</li>
+        <li><b>homeroom_teachers</b> (<u>id</u>, <i>user_id</i>, <i>class_id</i>, nip, phone_number, created_at, updated_at)</li>
+        <li><b>parents</b> (<u>id</u>, <i>user_id</i>, phone_number, created_at, updated_at)</li>
+        <li><b>parent_student</b> (<i>parent_id</i>, <i>student_id</i>)</li>
+        <li><b>absences</b> (<u>id</u>, <i>student_id</i>, status, attendance_time, checkout_time, late_duration, recorded_by, notes, created_at, updated_at)</li>
+        <li><b>izin_requests</b> (<u>id</u>, <i>student_id</i>, type, start_date, end_date, reason, attachment, status, created_at, updated_at)</li>
+        <li><b>subjects</b> (<u>id</u>, name, created_at, updated_at)</li>
+        <li><b>schedules</b> (<u>id</u>, <i>class_id</i>, <i>subject_id</i>, day, start_time, end_time, created_at, updated_at)</li>
+        <li><b>settings</b> (<u>id</u>, key, value, created_at, updated_at)</li>
+        <li><b>announcements</b> (<u>id</u>, title, content, type, created_at, updated_at)</li>
+        <li><b>holidays</b> (<u>id</u>, date, description, created_at, updated_at)</li>
+    </ul>
+
+    <br>
+
+    <h2>3.X. Kamus Data (Spesifikasi Basis Data)</h2>
+    <p class="indent">Kamus data memuat rincian tabel yang digunakan di dalam sistem beserta tipe datanya. Sistem absensi ini menggunakan database relasional (MySQL) dengan struktur tabel sebagai berikut:</p>
+
+    <h3>1. Tabel Users</h3>
+    <p>Fungsi: Menyimpan data autentikasi pengguna (Admin, Wali Kelas, Orang Tua, Siswa).</p>
+    <table>
+        <tr><th>Nama Field</th><th>Tipe Data</th><th>Panjang</th><th>Keterangan</th></tr>
+        <tr><td><span class="pk">id</span></td><td>BigInt</td><td>20</td><td>Primary Key, Auto Increment</td></tr>
+        <tr><td>name</td><td>Varchar</td><td>255</td><td>Nama Pengguna</td></tr>
+        <tr><td>email</td><td>Varchar</td><td>255</td><td>Email (Unique)</td></tr>
+        <tr><td>password</td><td>Varchar</td><td>255</td><td>Password Terenkripsi</td></tr>
+        <tr><td>role</td><td>Varchar</td><td>50</td><td>Hak Akses Pengguna</td></tr>
+        <tr><td>is_approved</td><td>TinyInt</td><td>1</td><td>Status Persetujuan Akun</td></tr>
+    </table>
+
+    <h3>2. Tabel Classes</h3>
+    <p>Fungsi: Menyimpan data kelas yang ada di sekolah.</p>
+    <table>
+        <tr><th>Nama Field</th><th>Tipe Data</th><th>Panjang</th><th>Keterangan</th></tr>
+        <tr><td><span class="pk">id</span></td><td>BigInt</td><td>20</td><td>Primary Key</td></tr>
+        <tr><td>name</td><td>Varchar</td><td>255</td><td>Nama Kelas</td></tr>
+        <tr><td>grade</td><td>Varchar</td><td>50</td><td>Tingkat Kelas (X, XI, XII)</td></tr>
+        <tr><td>major</td><td>Varchar</td><td>100</td><td>Jurusan</td></tr>
+        <tr><td>dismissal_time</td><td>Time</td><td>-</td><td>Jam Kepulangan Kelas</td></tr>
+    </table>
+
+    <h3>3. Tabel Students</h3>
+    <p>Fungsi: Menyimpan data profil siswa.</p>
+    <table>
+        <tr><th>Nama Field</th><th>Tipe Data</th><th>Panjang</th><th>Keterangan</th></tr>
+        <tr><td><span class="pk">id</span></td><td>BigInt</td><td>20</td><td>Primary Key</td></tr>
+        <tr><td><span class="fk">class_id</span></td><td>BigInt</td><td>20</td><td>Foreign Key -> classes(id)</td></tr>
+        <tr><td>nisn</td><td>Varchar</td><td>50</td><td>Nomor Induk Siswa</td></tr>
+        <tr><td>name</td><td>Varchar</td><td>255</td><td>Nama Lengkap Siswa</td></tr>
+        <tr><td>rfid_uid</td><td>Varchar</td><td>255</td><td>Kode Unik Kartu RFID</td></tr>
+        <tr><td>gender</td><td>Enum</td><td>-</td><td>Jenis Kelamin (L/P)</td></tr>
+    </table>
+
+    <h3>4. Tabel Homeroom Teachers</h3>
+    <p>Fungsi: Menyimpan data wali kelas beserta relasinya ke kelas yang diampu.</p>
+    <table>
+        <tr><th>Nama Field</th><th>Tipe Data</th><th>Panjang</th><th>Keterangan</th></tr>
+        <tr><td><span class="pk">id</span></td><td>BigInt</td><td>20</td><td>Primary Key</td></tr>
+        <tr><td><span class="fk">user_id</span></td><td>BigInt</td><td>20</td><td>Foreign Key -> users(id)</td></tr>
+        <tr><td><span class="fk">class_id</span></td><td>BigInt</td><td>20</td><td>Foreign Key -> classes(id)</td></tr>
+        <tr><td>nip</td><td>Varchar</td><td>50</td><td>Nomor Induk Pegawai</td></tr>
+    </table>
+
+    <h3>5. Tabel Absences</h3>
+    <p>Fungsi: Menyimpan catatan kehadiran harian siswa.</p>
+    <table>
+        <tr><th>Nama Field</th><th>Tipe Data</th><th>Panjang</th><th>Keterangan</th></tr>
+        <tr><td><span class="pk">id</span></td><td>BigInt</td><td>20</td><td>Primary Key</td></tr>
+        <tr><td><span class="fk">student_id</span></td><td>BigInt</td><td>20</td><td>Foreign Key -> students(id)</td></tr>
+        <tr><td>status</td><td>Varchar</td><td>50</td><td>Hadir, Izin, Sakit, Alpha, Terlambat</td></tr>
+        <tr><td>attendance_time</td><td>DateTime</td><td>-</td><td>Waktu Absen Masuk</td></tr>
+        <tr><td>checkout_time</td><td>DateTime</td><td>-</td><td>Waktu Absen Pulang</td></tr>
+        <tr><td>recorded_by</td><td>Varchar</td><td>100</td><td>Perekam (RFID / Manual)</td></tr>
+    </table>
+
+    <h3>6. Tabel Izin Requests</h3>
+    <p>Fungsi: Menyimpan data pengajuan izin/sakit dari siswa atau orang tua.</p>
+    <table>
+        <tr><th>Nama Field</th><th>Tipe Data</th><th>Panjang</th><th>Keterangan</th></tr>
+        <tr><td><span class="pk">id</span></td><td>BigInt</td><td>20</td><td>Primary Key</td></tr>
+        <tr><td><span class="fk">student_id</span></td><td>BigInt</td><td>20</td><td>Foreign Key -> students(id)</td></tr>
+        <tr><td>type</td><td>Varchar</td><td>50</td><td>Jenis (Izin / Sakit)</td></tr>
+        <tr><td>start_date</td><td>Date</td><td>-</td><td>Tanggal Mulai</td></tr>
+        <tr><td>end_date</td><td>Date</td><td>-</td><td>Tanggal Selesai</td></tr>
+        <tr><td>status</td><td>Varchar</td><td>50</td><td>Pending, Approved, Rejected</td></tr>
+    </table>
+
+</body>
+</html>
