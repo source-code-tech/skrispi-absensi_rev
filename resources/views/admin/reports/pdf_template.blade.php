@@ -106,7 +106,7 @@
         .pill-terlambat { background: #fef9c3; color: #a16207; }
         .pill-izin      { background: #dbeafe; color: #1d4ed8; }
         .pill-sakit     { background: #cffafe; color: #0e7490; }
-        .pill-alpha, .pill-alpa { background: #fee2e2; color: #b91c1c; }
+        .pill-alpha, .pill-alpa, .pill-alfa { background: #fee2e2; color: #b91c1c; }
 
         /* Empty state */
         .empty-row td { text-align: center; padding: 20px; color: #94a3b8; font-style: italic; }
@@ -129,7 +129,7 @@
         $totalTerlambat = $absences->where('status', 'Terlambat')->count();
         $totalIzin    = $absences->where('status', 'Izin')->count();
         $totalSakit   = $absences->where('status', 'Sakit')->count();
-        $totalAlpha   = $absences->whereIn('status', ['Alpha', 'Alpa'])->count();
+        $totalAlfa   = $absences->whereIn('status', ['Alfa', 'Alpa'])->count();
     @endphp
 
     {{-- ── 1. KOP SURAT ── --}}
@@ -204,7 +204,7 @@
             </td>
             <td>
                 <div class="summary-box box-alpha">
-                    <div class="s-count">{{ $totalAlpha }}</div>
+                    <div class="s-count">{{ $totalAlfa }}</div>
                     <div class="s-label">Alpha</div>
                 </div>
             </td>

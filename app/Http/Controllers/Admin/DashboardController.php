@@ -62,7 +62,7 @@ class DashboardController extends Controller
         $grafikHadir = [];
         $grafikTerlambat = [];
         $grafikIzinSakit = [];
-        $grafikAlpha = [];
+        $grafikAlfa = [];
 
         for ($i = 6; $i >= 0; $i--) {
             $date = Carbon::today()->subDays($i);
@@ -82,7 +82,7 @@ class DashboardController extends Controller
             $grafikHadir[] = (clone $query)->where('status', 'Hadir')->count();
             $grafikTerlambat[] = (clone $query)->where('status', 'Terlambat')->count();
             $grafikIzinSakit[] = (clone $query)->whereIn('status', ['Izin', 'Sakit'])->count();
-            $grafikAlpha[] = (clone $query)->where('status', 'Alpha')->count();
+            $grafikAlfa[] = (clone $query)->where('status', 'Alfa')->count();
         }
         
         $recentAbsences = Absence::with(['student.class'])
@@ -95,7 +95,7 @@ class DashboardController extends Controller
         return view('admin.dashboard', compact(
         'totalClasses', 'totalStudents', 'attendancePercentage', 'totalTeachers',
         'recentAbsences', 'totalUsers', 'pendingUsers',
-        'classes', 'classId', 'grafikTanggal', 'grafikHadir', 'grafikTerlambat', 'grafikIzinSakit', 'grafikAlpha'
+        'classes', 'classId', 'grafikTanggal', 'grafikHadir', 'grafikTerlambat', 'grafikIzinSakit', 'grafikAlfa'
     ));
     }
 }

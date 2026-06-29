@@ -57,7 +57,7 @@
                         <div>
                             <label class="block text-sm font-bold text-gray-700 mb-3">Status Baru <span class="text-red-500">*</span></label>
                             <div class="grid grid-cols-3 sm:grid-cols-5 gap-3">
-                                @foreach(['Hadir', 'Terlambat', 'Sakit', 'Izin', 'Alpha'] as $status)
+                                @foreach(['Hadir', 'Terlambat', 'Sakit', 'Izin', 'Alfa'] as $status)
                                     <label class="cursor-pointer group">
                                         <input type="radio" name="status" value="{{ $status }}" class="peer sr-only" required {{ old('status', $attendance->status) == $status ? 'checked' : '' }}>
                                         <div class="rounded-xl border-2 border-gray-200 p-3 text-center transition-all bg-white hover:bg-gray-50 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:text-amber-700 peer-checked:shadow-sm">

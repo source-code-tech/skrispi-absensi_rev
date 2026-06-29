@@ -39,7 +39,7 @@ class ParentController extends Controller
         // Hitung Statistik Total Absensi SIA (Sejak Awal Semester/Waktu Tertentu)
         $totalSIA = Absence::whereIn('student_id', $studentIds)
                            ->select('status', DB::raw('count(*) as count'))
-                           ->whereIn('status', ['Alpha', 'Sakit', 'Izin', 'Terlambat', 'Hadir'])
+                           ->whereIn('status', ['Alfa', 'Sakit', 'Izin', 'Terlambat', 'Hadir'])
                            ->groupBy('status')
                            ->groupBy('status')
                            ->pluck('count', 'status')
@@ -149,7 +149,18 @@ class ParentController extends Controller
 }
 
         // Export ke Excel (XLSX)
-        return Excel::download(new ParentAbsenceExport($absencesToExport), $fileName . '.xlsx');
+      $studentNames = $parentRecord->students->pluck('name')->toArray();
+
+return Excel::download(
+    new ParentAbsenceExport(
+        $absencesToExport,                                             
+        count($studentNames) === 1 ? $studentNames[0] : 'Semua Anak', 
+        '',                                                             
+        '',                                                            
+        $studentNames                                                   
+    ),
+    $fileName . '.xlsx'
+);
     }
 
     /**
@@ -191,7 +202,7 @@ class ParentController extends Controller
     {
         $user = Auth::user();
         
-        // 🛑 OTORISASI KRITIS: Pastikan record absensi ini milik anak dari user yang login
+        // OTORISASI KRITIS: Pastikan record absensi ini milik anak dari user yang login
         $parentRecord = ParentModel::where('user_id', $user->id)->first();
         if (!$parentRecord || !$parentRecord->students->pluck('id')->contains($absence->student_id)) {
             abort(403, 'Akses Ditolak. Record absensi ini bukan milik anak Anda.');

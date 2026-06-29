@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('students', function (Blueprint $table) {
             // 🚨 Tambahkan kolom 'address' setelah kolom 'phone_number' (atau di posisi yang sesuai)
-            $table->string('address', 500)->nullable()->after('phone_number');
+            $table->string('address', 300)->nullable()->after('phone_number');
         });
     }
 

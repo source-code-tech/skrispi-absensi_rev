@@ -60,7 +60,7 @@ class ReportController extends Controller
                 'terlambat' => $records->where('status', 'Terlambat')->count(),
                 'sakit'     => $records->where('status', 'Sakit')->count(),
                 'izin'      => $records->where('status', 'Izin')->count(),
-                'alpha'     => $records->whereIn('status', ['Alpha', 'Alpa'])->count(),
+                'alfa'      => $records->where('status', 'Alfa')->count(),
                 'total'     => $records->count(),
             ];
         })

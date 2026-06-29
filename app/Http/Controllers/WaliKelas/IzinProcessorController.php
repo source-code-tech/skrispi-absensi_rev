@@ -79,14 +79,14 @@ class IzinProcessorController extends Controller
                                       ->first();
 
             if ($existingAbsence) {
-                // Jika sudah ada record, hanya boleh update jika statusnya 'Alpha'
-                if ($existingAbsence->status === 'Alpha') {
+                // Jika sudah ada record, hanya boleh update jika statusnya 'Alfa'
+                if ($existingAbsence->status === 'Alfa') {
                     $existingAbsence->update([
                         'status' => $izinRequest->type, // Sakit/Izin
                         'notes' => "Pengajuan dari Orang Tua: " . $izinRequest->reason,
                         'recorded_by' => 'Wali Kelas: ' . Auth::user()->name,
                         'is_manual_corrected' => true,
-                        'correction_note' => 'Disetujui dari status Alpha (Online)',
+                        'correction_note' => 'Disetujui dari status Alfa (Online)',
                         'corrected_by' => Auth::user()->name,
                     ]);
                 } else {

@@ -85,25 +85,28 @@
                                     'Terlambat' => 'bg-amber-100 text-amber-700 border-amber-200',
                                     'Sakit' => 'bg-cyan-100 text-cyan-700 border-cyan-200',
                                     'Izin' => 'bg-blue-100 text-blue-700 border-blue-200',
-                                    'Alpha' => 'bg-red-100 text-red-700 border-red-200',
+                                    'Alfa' => 'bg-red-100 text-red-700 border-red-200',
                                     default => 'bg-gray-100 text-gray-700'
                                 };
                             @endphp
                             <tr class="hover:bg-gray-50 transition duration-150 group">
                                 <td class="px-6 py-4 text-center text-sm font-bold text-gray-400 group-hover:text-indigo-500">{{ $loop->iteration }}</td>
-                                <td class="px-6 py-4 text-sm font-bold text-gray-900">{{ $absence->student->name }}</td>
+                                <td class="px-6 py-4">
+                                    <div class="text-sm font-bold text-gray-900">{{ $absence->student->name }}</div>
+                                    <div class="text-xs text-gray-500">NISN: {{ $absence->student->nisn ?? '-' }}</div>
+                                </td>
                                 <td class="px-6 py-4 text-sm font-medium text-gray-600">
                                     {{ $absence->attendance_time->translatedFormat('d F Y') }}
                                 </td>
                                 <td class="px-6 py-4 text-sm font-mono text-gray-700">
-                                    @if(in_array($absence->status, ['Sakit', 'Izin', 'Alpha']))
+                                    @if(in_array($absence->status, ['Sakit', 'Izin', 'Alfa']))
                                         <span class="text-gray-400">-</span>
                                     @else
                                         {{ $absence->attendance_time ? $absence->attendance_time->format('H:i') : '-' }}
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 text-sm font-mono text-gray-700">
-                                    @if(in_array($absence->status, ['Sakit', 'Izin', 'Alpha']))
+                                    @if(in_array($absence->status, ['Sakit', 'Izin', 'Alfa']))
                                         <span class="text-gray-400">-</span>
                                     @elseif($absence->checkout_time)
                                         {{ $absence->checkout_time->format('H:i') }}

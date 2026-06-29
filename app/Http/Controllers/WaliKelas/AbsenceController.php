@@ -113,7 +113,7 @@ class AbsenceController extends Controller
     {
         $request->validate([
              'nis' => 'required|string|exists:students,nis',
-             'status' => 'required|in:Hadir,Terlambat,Sakit,Izin,Alpha',
+             'status' => 'required|in:Hadir,Terlambat,Sakit,Izin,Alfa',
              'notes' => 'nullable|string|max:500',
         ]);
 
@@ -227,7 +227,7 @@ class AbsenceController extends Controller
         if ($existingAbsence && is_null($existingAbsence->checkout_time)) {
             
             // 🛑 TAMBAHKAN BLOK KODE INI UNTUK MENCEGAH ALPHA/SAKIT/IZIN BISA ABSEN PULANG
-            if (in_array($existingAbsence->status, ['Alpha', 'Sakit', 'Izin'])) {
+            if (in_array($existingAbsence->status, ['Alfa', 'Sakit', 'Izin'])) {
                 return response()->json([
                     'success' => false, 
                     'message' => "❌ Gagal Absen. Siswa sudah tercatat dengan status: {$existingAbsence->status} hari ini.",
@@ -416,7 +416,7 @@ class AbsenceController extends Controller
     public function manualUpdate(Request $request, Absence $attendance)
     {
         $request->validate([
-             'status' => 'required|in:Hadir,Terlambat,Sakit,Izin,Alpha',
+             'status' => 'required|in:Hadir,Terlambat,Sakit,Izin,Alfa',
              'notes' => 'nullable|string|max:500',
              'nis' => 'required|string|exists:students,nis',
              'correction_reason' => 'required|string|max:500', 
@@ -428,10 +428,6 @@ class AbsenceController extends Controller
         $attendance->update([
             'status' => $request->status,
             'notes' => $request->notes, // Jika keterangan izin/sakitnya ikut diubah
-            
-            //  Alasan koreksi (misal: "salah klik") kita simpan ke kolom 'reason' database
-            'reason' => $request->correction_reason, 
-            
             'is_manual_corrected' => true,
             'corrected_by' => $correctedBy,
             'correction_note' => $request->correction_reason, // Kolom audit log tambahan jika ada
@@ -463,7 +459,7 @@ class AbsenceController extends Controller
 
         // 1. Ambil semua catatan absensi hari ini yang berstatus SIA
         $absencesToNotify = Absence::whereDate('attendance_time', $today)
-            ->whereIn('status', ['Sakit', 'Izin', 'Alpha'])
+            ->whereIn('status', ['Sakit', 'Izin', 'Alfa'])
             ->whereHas('student', function ($query) use ($classId) {
                 $query->where('class_id', $classId); 
             })
@@ -471,7 +467,7 @@ class AbsenceController extends Controller
             ->get();
             
         if ($absencesToNotify->isEmpty()) {
-            return redirect()->back()->with('warning', 'Tidak ada siswa dengan status Sakit, Izin, atau Alpha hari ini di kelas Anda.');
+            return redirect()->back()->with('warning', 'Tidak ada siswa dengan status Sakit, Izin, atau Alfa hari ini di kelas Anda.');
         }
 
         // 2. Loop dan Kirim Notifikasi per Siswa

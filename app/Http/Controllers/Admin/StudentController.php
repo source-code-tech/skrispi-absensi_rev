@@ -83,12 +83,12 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nisn' => 'required|string|unique:students,nisn|max:20',
+            'nisn' => 'required|string|unique:students,nisn|max:10',
             'nis' => 'nullable|string|unique:students,nis|max:20',
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:100',
             'gender' => 'required|in:Laki-laki,Perempuan',
             'class_id' => 'required|exists:classes,id',
-            'address' => 'nullable|string|max:500',
+            'address' => 'nullable|string|max:300',
             'birth_place' => 'nullable|string|max:100',
             'birth_date' => 'nullable|date',
             'photo' => 'nullable|image|max:2048|mimes:jpg,jpeg,png', 
@@ -153,9 +153,9 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $request->validate([
-            'nisn' => 'required|string|max:20|unique:students,nisn,' . $student->id,
+            'nisn' => 'required|string|max:10|unique:students,nisn,' . $student->id,
             'nis' => 'nullable|string|max:20|unique:students,nis,' . $student->id,
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:100',
             'gender' => 'required|in:Laki-laki,Perempuan',
             'class_id' => 'required|exists:classes,id',
             'status' => 'required|in:active,inactive',

@@ -40,7 +40,7 @@ class AbsenceReportExport implements FromCollection, WithHeadings, WithMapping, 
 
             // Insert 2 baris di atas untuk judul dan periode
             $sheet->insertNewRowBefore(1, 2);
-            $sheet->setCellValue('A1', "Laporan Absensi - {$this->className}");
+            $sheet->setCellValue('A1', "Laporan Absensi Harian - {$this->className}");
             $sheet->setCellValue('A2', "Periode: {$this->startDate->format('d/m/Y')} s/d {$this->endDate->format('d/m/Y')}");
             $sheet->mergeCells('A1:H1');
             $sheet->mergeCells('A2:H2');

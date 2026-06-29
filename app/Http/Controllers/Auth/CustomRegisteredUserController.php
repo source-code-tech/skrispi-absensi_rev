@@ -30,8 +30,8 @@ class CustomRegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'name' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:100', 'unique:'.User::class],
             'role' => ['required', 'string', Rule::in(['siswa', 'wali_kelas', 'orang_tua'])], 
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);

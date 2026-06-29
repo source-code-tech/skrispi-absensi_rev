@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('students', function (Blueprint $table) {
             // 🚨 Tambahkan kolom 'email'
             // Harus nullable dan unik karena tidak semua siswa mungkin punya email
-            $table->string('email')->unique()->nullable()->after('name');
+            $table->string('email', 100)->unique()->nullable()->after('name');
         });
     }
 

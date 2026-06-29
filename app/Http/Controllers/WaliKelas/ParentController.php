@@ -45,7 +45,7 @@ class ParentController extends Controller
         }
         
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:100',
             'relation_status' => 'required|in:Ayah,Ibu,Wali',
             'phone_number' => 'required|string|max:20', 
         ]);

@@ -15,7 +15,6 @@ class Absence extends Model
     'checkout_time', 
     'status', 
     'late_duration', 
-    'reason', // 🔒 Biarkan ini tetep 'reason' sesuai database aslimu
     'notes',
     'recorded_by',
 

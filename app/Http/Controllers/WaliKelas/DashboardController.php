@@ -32,7 +32,7 @@ class DashboardController extends Controller
         $dailyStats = []; 
         $pendingRequestsCount = 0; 
         
-        $maxAlpha = 3;
+        $maxAlfa = 3;
         $maxSick = 5;
         $maxIzin = 5;
 
@@ -40,7 +40,7 @@ class DashboardController extends Controller
         $grafikTanggal = [];
         $grafikHadir = [];
         $grafikIzinSakit = [];
-        $grafikAlpha = [];
+        $grafikAlfa = [];
 
         if ($classId) {
             $today = Carbon::today();
@@ -53,13 +53,13 @@ class DashboardController extends Controller
             });
             
             // Tentukan batas absensi dan pastikan tipe integer
-            $maxAlpha = (int)($settings['max_alpha'] ?? 3);
+            $maxAlfa = (int)($settings['max_alpha'] ?? 3);
             $maxSick = (int)($settings['max_sick'] ?? 5);
             $maxIzin = (int)($settings['max_izin'] ?? 5);
 
             // 2. Hitung Total Absensi SIA (Untuk Peringatan)
             $currentCounts = Absence::select('student_id', 'status', DB::raw('count(*) as count'))
-                ->whereIn('status', ['Alpha', 'Sakit', 'Izin'])
+                ->whereIn('status', ['Alfa', 'Sakit', 'Izin'])
                 ->whereHas('student', function ($query) use ($classId) {
                     $query->where('class_id', $classId);
                 })
@@ -71,9 +71,9 @@ class DashboardController extends Controller
                 $maxLimit = 0;
                 $warningType = '';
 
-                if ($count->status == 'Alpha') {
-                    $maxLimit = $maxAlpha;
-                    $warningType = 'Alpha';
+                if ($count->status == 'Alfa') {
+                    $maxLimit = $maxAlfa;
+                    $warningType = 'Alfa';
                 } elseif ($count->status == 'Sakit') {
                     $maxLimit = $maxSick;
                     $warningType = 'Sakit';
@@ -144,7 +144,7 @@ class DashboardController extends Controller
                 $grafikHadir = [];
                 $grafikTerlambat = []; // 💡 Tambahkan ini
                 $grafikIzinSakit = [];
-                $grafikAlpha = [];
+                $grafikAlfa = [];
 
                 for ($i = 6; $i >= 0; $i--) {
                     $date = Carbon::today()->subDays($i);
@@ -170,8 +170,8 @@ class DashboardController extends Controller
                             $q->where('class_id', $classId);
                         })->count();
 
-                    $grafikAlpha[] = Absence::whereDate('attendance_time', $date)
-                        ->where('status', 'Alpha')
+                    $grafikAlfa[] = Absence::whereDate('attendance_time', $date)
+                        ->where('status', 'Alfa')
                         ->whereHas('student', function ($q) use ($classId) {
                             $q->where('class_id', $classId);
                         })->count();
@@ -188,7 +188,7 @@ class DashboardController extends Controller
             'recentAbsences' => $recentAbsences,
             'warningStudents' => $warningStudents, 
             'dailyStats' => $dailyStats,
-            'maxLimits' => ['Alpha' => $maxAlpha, 'Sakit' => $maxSick, 'Izin' => $maxIzin],
+            'maxLimits' => ['Alfa' => $maxAlfa, 'Sakit' => $maxSick, 'Izin' => $maxIzin],
             'pendingRequestsCount' => $pendingRequestsCount,
             'totalIzinSakit' => $totalIzinSakit,
             // Data Grafik
@@ -196,7 +196,7 @@ class DashboardController extends Controller
             'grafikHadir' => $grafikHadir,
             'grafikTerlambat' => $grafikTerlambat, // Jangan lupa yang ini!
             'grafikIzinSakit' => $grafikIzinSakit,
-            'grafikAlpha' => $grafikAlpha
+            'grafikAlfa' => $grafikAlfa
             
         ]);
     }

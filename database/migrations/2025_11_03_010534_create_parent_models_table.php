@@ -12,9 +12,9 @@ return new class extends Migration
             $table->id();
             // User ID adalah akun login untuk orang tua
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->unique();
-            $table->string('name'); // Nama lengkap orang tua (bisa berbeda dari nama user)
-            $table->string('relation_status')->nullable(); // Misal: Ayah/Ibu/Wali
-            $table->string('phone_number')->unique(); 
+            $table->string('name', 100); // Nama lengkap orang tua (bisa berbeda dari nama user)
+            $table->string('relation_status', 10)->nullable(); // Misal: Ayah/Ibu/Wali
+            $table->string('phone_number', 20)->unique(); 
             $table->timestamps();
         });
     }

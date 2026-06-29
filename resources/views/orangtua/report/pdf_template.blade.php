@@ -143,7 +143,7 @@
         $totalTerlambat = $absences->where('status', 'Terlambat')->count();
         $totalIzin      = $absences->where('status', 'Izin')->count();
         $totalSakit     = $absences->where('status', 'Sakit')->count();
-        $totalAlpha     = $absences->whereIn('status', ['Alpha', 'Alpa'])->count();
+        $totalAlfa     = $absences->whereIn('status', ['Alfa', 'Alpa'])->count();
 
         // Kelompokkan per anak
         $grouped = $absences->groupBy(fn($a) => $a->student->name ?? 'N/A');
@@ -221,7 +221,7 @@
             </td>
             <td>
                 <div class="summary-box box-alpha">
-                    <div class="s-count">{{ $totalAlpha }}</div>
+                    <div class="s-count">{{ $totalAlfa }}</div>
                     <div class="s-label">Alpha</div>
                 </div>
             </td>

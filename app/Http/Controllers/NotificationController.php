@@ -197,7 +197,7 @@ class NotificationController extends Controller
         $statusClean = strtolower($status);
         if ($statusClean === 'terlambat') {
             return 'fas fa-exclamation-triangle text-warning';
-        } elseif ($statusClean === 'alpa' || $statusClean === 'alpha') {
+        } elseif ($statusClean === 'alpa' || $statusClean === 'Alfa') {
             return 'fas fa-times-circle text-danger';
         } elseif ($statusClean === 'sakit' || $statusClean === 'izin') {
             return 'fas fa-envelope text-info';

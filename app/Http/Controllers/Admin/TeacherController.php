@@ -63,7 +63,7 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:100',
             'email' => 'required|string|email|unique:users,email',
             'password' => 'required|string|min:8',
             // Pastikan class_id unik dan ada di tabel classes
@@ -137,7 +137,7 @@ class TeacherController extends Controller
     {
         // 1. Validasi
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:100',
             // Email harus unik, kecuali email milik user ini sendiri
             'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($teacher->id)], 
             'password' => 'nullable|string|min:8',

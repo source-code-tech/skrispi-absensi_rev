@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title', 150);
             $table->text('content');
             $table->enum('target_type', ['all', 'class'])->default('all');
             $table->foreignId('target_id')->nullable()->constrained('classes')->nullOnDelete(); // Jika target_type = class

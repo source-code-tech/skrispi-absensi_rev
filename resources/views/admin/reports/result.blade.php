@@ -45,8 +45,6 @@
             {{-- Tombol Aksi (Export) --}}
             <div class="flex space-x-3 mt-4 lg:mt-0">
                 
-            
-                
                 {{-- EXPORT PDF --}}
                 <form action="{{ route('report.export.pdf') }}" method="GET" class="inline-flex" target="_blank">
                     <input type="hidden" name="class_id" value="{{ request('class_id') }}">
@@ -67,14 +65,13 @@
                     </button>
                 </form>
 
-                
                 <a href="{{ route('report.index') }}" class="inline-flex items-center px-4 py-2 text-sm font-bold rounded-xl shadow-sm text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 transition duration-150">
                     <i class="fas fa-arrow-left mr-2"></i> Kembali
                 </a>
             </div>
         </div>
         
-        <div class="p-0"> {{-- Padding 0 untuk table full width --}}
+        <div class="p-0">
             @if($absences->isEmpty())
                 <div class="p-12 text-center">
                     <div class="inline-block p-4 rounded-full bg-indigo-50 text-indigo-500 mb-4">
@@ -102,7 +99,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400 font-medium">{{ $loop->iteration }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm font-bold text-gray-800">{{ $absence->student->name ?? 'Siswa Dihapus' }}</div>
-                                    <div class="text-xs text-gray-500">NIS: {{ $absence->student->nis ?? '-' }}</div>
+                                    <div class="text-xs text-gray-500">NISN: {{ $absence->student->nisn ?? '-' }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-medium bg-gray-100 text-gray-800">
@@ -118,7 +115,7 @@
                                         $statusStyles = [
                                             'Hadir'     => 'bg-green-100 text-green-700',
                                             'Terlambat' => 'bg-amber-100 text-amber-700',
-                                            'Alpha'     => 'bg-red-100 text-red-700',
+                                            'Alfa'      => 'bg-red-100 text-red-700',
                                             'Absen'     => 'bg-red-100 text-red-700',
                                             'Izin'      => 'bg-blue-100 text-blue-700',
                                             'Sakit'     => 'bg-cyan-100 text-cyan-700',

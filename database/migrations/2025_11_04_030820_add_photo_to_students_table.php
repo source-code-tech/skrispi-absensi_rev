@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('students', function (Blueprint $table) {
             // 🚨 Tambahkan kolom 'photo' setelah kolom 'class_id'
-            $table->string('photo', 255)->nullable()->default('default_avatar.png')->after('class_id');
+            $table->string('photo', 150)->nullable()->default('default_avatar.png')->after('class_id');
         });
     }
 

@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique(); // Contoh: X RPL 1
-            $table->string('grade');          // Contoh: X, XI, XII
+            $table->string('name', 20)->unique(); // Contoh: X RPL 1
+            $table->string('grade', 5);          // Contoh: X, XI, XII
             $table->timestamps();
         });
     }

@@ -90,7 +90,7 @@
                         <div>
                             <label class="block text-sm font-bold text-gray-700 mb-2">Status <span class="text-red-500">*</span></label>
                             <div class="grid grid-cols-3 gap-3">
-                                @foreach(['Hadir', 'Terlambat', 'Sakit', 'Izin', 'Alpha'] as $status)
+                                @foreach(['Hadir', 'Terlambat', 'Sakit', 'Izin', 'Alfa'] as $status)
                                     <label class="cursor-pointer">
                                         <input type="radio" name="status" value="{{ $status }}" class="peer sr-only" required {{ old('status') == $status ? 'checked' : '' }}>
                                         <div class="rounded-xl border-2 border-gray-200 p-2 text-center transition-all hover:bg-gray-50 peer-checked:border-teal-500 peer-checked:bg-teal-50 peer-checked:text-teal-700">
@@ -176,7 +176,7 @@
                                                 'Terlambat' => 'bg-amber-100 text-amber-700 border-amber-200',
                                                 'Sakit' => 'bg-cyan-100 text-cyan-700 border-cyan-200',
                                                 'Izin' => 'bg-blue-100 text-blue-700 border-blue-200',
-                                                'Alpha' => 'bg-red-100 text-red-700 border-red-200',
+                                                'Alfa' => 'bg-red-100 text-red-700 border-red-200',
                                             ];
                                             $badge = $badges[$att->status] ?? 'bg-gray-100 text-gray-700';
                                         @endphp

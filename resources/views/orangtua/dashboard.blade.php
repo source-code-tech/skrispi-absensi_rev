@@ -66,7 +66,7 @@
                 </div>
             </div>
 
-            {{-- 💡 WIDGET WALI KELAS --}}
+            {{-- WIDGET WALI KELAS --}}
             @if($parentRecord->students->isNotEmpty())
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                 @foreach($parentRecord->students as $student)
@@ -184,7 +184,7 @@
                             ['label' => 'Terlambat', 'count' => $totalSIA['Terlambat'] ?? 0, 'icon' => 'fas fa-clock', 'color' => 'from-amber-400 to-orange-500', 'bg' => 'bg-amber-50', 'text' => 'text-amber-600'],
                             ['label' => 'Sakit', 'count' => $totalSIA['Sakit'] ?? 0, 'icon' => 'fas fa-procedures', 'color' => 'from-blue-400 to-cyan-500', 'bg' => 'bg-blue-50', 'text' => 'text-blue-600'],
                             ['label' => 'Izin', 'count' => $totalSIA['Izin'] ?? 0, 'icon' => 'fas fa-envelope-open-text', 'color' => 'from-indigo-400 to-purple-500', 'bg' => 'bg-indigo-50', 'text' => 'text-indigo-600'],
-                            ['label' => 'Alpha', 'count' => $totalSIA['Alpha'] ?? 0, 'icon' => 'fas fa-times-circle', 'color' => 'from-red-400 to-rose-500', 'bg' => 'bg-red-50', 'text' => 'text-red-600'],
+                            ['label' => 'Alfa', 'count' => $totalSIA['Alfa'] ?? 0, 'icon' => 'fas fa-times-circle', 'color' => 'from-red-400 to-rose-500', 'bg' => 'bg-red-50', 'text' => 'text-red-600'],
                         ];
                     @endphp
                     
@@ -254,9 +254,9 @@
                                         $statusStyles = [
                                             'Hadir' => 'bg-green-100 text-green-700',
                                             'Terlambat' => 'bg-amber-100 text-amber-700',
-                                            'Absen' => 'bg-red-100 text-red-700',
                                             'Izin' => 'bg-blue-100 text-blue-700',
                                             'Sakit' => 'bg-purple-100 text-purple-700',
+                                            'Alfa'   => 'bg-red-100 text-red-700', 
                                         ];
                                         $style = $statusStyles[$absence->status] ?? 'bg-gray-100 text-gray-600';
                                         

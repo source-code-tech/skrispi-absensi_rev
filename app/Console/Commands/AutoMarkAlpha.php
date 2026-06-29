@@ -13,7 +13,7 @@ use Illuminate\Console\Command;
 class AutoMarkAlpha extends Command
 {
     protected $signature = 'absence:auto-alpha';
-    protected $description = 'Auto tandai Alpha untuk siswa yang tidak scan hari ini';
+    protected $description = 'Auto tandai Alfa untuk siswa yang tidak scan hari ini';
 
     public function handle()
     {
@@ -64,7 +64,7 @@ class AutoMarkAlpha extends Command
                     Absence::create([
                         'student_id'      => $student->id,
                         'attendance_time' => $jamPulang,
-                        'status'          => 'Alpha',
+                        'status'          => 'Alfa',
                         'recorded_by'     => 'System Auto',
                     ]);
                     $count++;
@@ -72,6 +72,6 @@ class AutoMarkAlpha extends Command
             }
         }
 
-        $this->info("Auto-Alpha selesai: {$count} siswa ditandai Alpha.");
+        $this->info("Auto-Alpha selesai: {$count} siswa ditandai Alfa.");
     }
 }

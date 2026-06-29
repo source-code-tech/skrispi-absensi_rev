@@ -209,7 +209,7 @@ window.onload = function () {
             let dataHadir = pastikanArray({!! json_encode($grafikHadir ?? []) !!});
             let dataTerlambat = pastikanArray({!! json_encode($grafikTerlambat ?? []) !!});
             let dataIzinSakit = pastikanArray({!! json_encode($grafikIzinSakit ?? []) !!});
-            let dataAlpha = pastikanArray({!! json_encode($grafikAlpha ?? []) !!});
+            let dataAlfa = pastikanArray({!! json_encode($grafikAlfa ?? []) !!});
 
             if (window.myAttendanceChart) {
                 window.myAttendanceChart.destroy();
@@ -250,8 +250,8 @@ window.onload = function () {
                             maxBarThickness: 16,
                         },
                         {
-                            label: 'Alpha',
-                            data: dataAlpha,
+                            label: 'Alfa',
+                            data: dataAlfa,
                             backgroundColor: '#EF4444', // Red 500
                             borderRadius: borderStyle,
                             maxBarThickness: 16,

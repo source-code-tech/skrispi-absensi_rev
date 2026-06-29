@@ -128,9 +128,9 @@ class StudentsImport implements ToCollection, WithHeadingRow, WithValidation, Wi
             // 'nis' dan 'nomor_telepon' dihapus dari validasi strict agar tidak error jika Excel mengirim angka (karena rule 'max' pada angka mengecek VALUE bukan LENGTH)
             // 'nis'           => 'nullable|string|max:20', 
             // 'nomor_telepon' => 'nullable|string|max:20', 
-            'nama_siswa'    => 'required|string|max:255',
+            'nama_siswa'    => 'required|string|max:100',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-            'alamat'        => 'nullable|string|max:500', 
+            'alamat'        => 'nullable|string|max:300', 
             'tempat_lahir'  => 'nullable|string|max:100', 
             'birth_date'    =>  'nullable',
             'nama_kelas' => [

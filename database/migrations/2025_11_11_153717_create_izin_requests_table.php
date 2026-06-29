@@ -14,7 +14,7 @@ return new class extends Migration
             $table->date('request_date'); // Tanggal izin berlaku
             $table->enum('type', ['Sakit', 'Izin']); // Jenis izin
             $table->text('reason'); // Keterangan dari orang tua
-            $table->string('attachment_path')->nullable(); // Path foto surat/bukti
+            $table->string('attachment_path', 200)->nullable(); // Path foto surat/bukti
             $table->enum('status', ['Pending', 'Approved', 'Rejected'])->default('Pending');
             $table->foreignId('approved_by')->nullable()->references('id')->on('users'); // Wali Kelas/Admin yang menyetujui
             $table->timestamps();

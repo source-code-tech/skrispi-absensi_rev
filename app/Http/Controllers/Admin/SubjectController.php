@@ -31,8 +31,8 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'code' => 'nullable|string|max:50|unique:subjects,code',
+            'name' => 'required|string|max:100',
+            'code' => 'nullable|string|max:20|unique:subjects,code',
         ], [
             'name.required' => 'Nama mata pelajaran wajib diisi.',
             'code.unique' => 'Kode mata pelajaran sudah ada.',
@@ -57,8 +57,8 @@ class SubjectController extends Controller
     public function update(Request $request, Subject $subject)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'code' => 'nullable|string|max:50|unique:subjects,code,' . $subject->id,
+            'name' => 'required|string|max:100',
+            'code' => 'nullable|string|max:20|unique:subjects,code,' . $subject->id,
         ], [
             'name.required' => 'Nama mata pelajaran wajib diisi.',
             'code.unique' => 'Kode mata pelajaran sudah ada.',

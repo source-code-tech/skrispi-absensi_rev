@@ -22,8 +22,8 @@ return new class extends Migration
             
             // Kolom Tambahan
             $table->time('late_duration')->nullable(); // Durasi keterlambatan jika Terlambat
-            $table->string('reason')->nullable(); // Keterangan jika Izin/Sakit/Alfa
-            $table->string('recorded_by')->nullable(); // Dicatat oleh (Wali Kelas/Sistem/Admin)
+            $table->string('reason', 200)->nullable(); // Keterangan jika Izin/Sakit/Alfa
+            $table->string('recorded_by', 50)->nullable(); // Dicatat oleh (Wali Kelas/Sistem/Admin)
 
             // Kombinasi unik: Siswa hanya bisa absen sekali sehari (tanpa status keluar)
             $table->unique(['student_id', 'attendance_time']);

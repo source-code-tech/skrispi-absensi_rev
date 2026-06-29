@@ -137,7 +137,7 @@
                     </div>
                 </div>
                 <h4 class="text-3xl font-extrabold text-gray-800 mb-1">
-                    {{ $dailyStats['Alpha'] ?? 0 }}
+                    {{ $dailyStats['Alfa'] ?? 0 }}
                 </h4>
                 <p class="text-sm text-gray-500 font-medium">Alpha Hari Ini</p>
             </div>
@@ -333,7 +333,7 @@
             const dataHadir = {!! json_encode($grafikHadir) !!};
             const dataTerlambat = {!! json_encode($grafikTerlambat) !!};
             const dataIzinSakit = {!! json_encode($grafikIzinSakit) !!};
-            const dataAlpha = {!! json_encode($grafikAlpha) !!};
+            const dataAlfa = {!! json_encode($grafikAlfa) !!};
 
             new Chart(ctx, {
                 type: 'bar',
@@ -359,8 +359,8 @@
                             borderRadius: 6,
                         },
                         {
-                            label: 'Alpha',
-                            data: dataAlpha,
+                            label: 'Alfa',
+                            data: dataAlfa,
                             backgroundColor: 'rgba(239, 68, 68, 0.8)', // Merah
                             borderRadius: 6,
                         }

@@ -79,7 +79,7 @@ class CentralAbsenceController extends Controller
 
         if ($existingAbsence) {
             // --- LOGIC SCAN OUT (PULANG) ---
-            if (in_array($existingAbsence->status, ['Alpha', 'Sakit', 'Izin'])) {
+            if (in_array($existingAbsence->status, ['Alfa', 'Sakit', 'Izin'])) {
                 return response()->json([
                     'success' => false, 
                     'message' => "❌ Gagal Absen. Siswa sudah tercatat dengan status: {$existingAbsence->status} hari ini.",
