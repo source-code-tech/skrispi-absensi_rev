@@ -17,36 +17,39 @@ class UserSeeder extends Seeder
        // }
         
         // 1. AKUN SUPER ADMIN (Otomatis Disetujui & Diverifikasi)
-        User::create([
-            'name' => 'Super Admin Sekolah',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('password'), 
-            'role' => 'super_admin',
-            // ✅ Status Wajib
-            'is_approved' => true, 
-            'email_verified_at' => Carbon::now(),
-        ]);
+        User::updateOrCreate(
+            ['email' => 'admin@gmail.com'],
+            [
+                'name' => 'Super Admin Sekolah',
+                'password' => Hash::make('password'), 
+                'role' => 'super_admin',
+                'is_approved' => true, 
+                'email_verified_at' => Carbon::now(),
+            ]
+        );
 
         // 2. AKUN WALI KELAS (Otomatis Disetujui & Diverifikasi untuk Testing)
-        User::create([
-            'name' => 'Wali Kelas X-A',
-            'email' => 'walikelas@sekolah.com',
-            'password' => Hash::make('password'),
-            'role' => 'wali_kelas',
-            // ✅ Status Wajib
-            'is_approved' => true, 
-            'email_verified_at' => Carbon::now(),
-        ]);
+        User::updateOrCreate(
+            ['email' => 'walikelas@sekolah.com'],
+            [
+                'name' => 'Wali Kelas X-A',
+                'password' => Hash::make('password'),
+                'role' => 'wali_kelas',
+                'is_approved' => true, 
+                'email_verified_at' => Carbon::now(),
+            ]
+        );
         
         // 3. AKUN ORANG TUA (Otomatis Disetujui & Diverifikasi untuk Testing)
-        User::create([
-            'name' => 'Bapak Budi Santoso',
-            'email' => 'ortu@sekolah.com',
-            'password' => Hash::make('password'),
-            'role' => 'orang_tua',
-            // ✅ Status Wajib
-            'is_approved' => true, 
-            'email_verified_at' => Carbon::now(),
-        ]);
+        User::updateOrCreate(
+            ['email' => 'ortu@sekolah.com'],
+            [
+                'name' => 'Bapak Budi Santoso',
+                'password' => Hash::make('password'),
+                'role' => 'orang_tua',
+                'is_approved' => true, 
+                'email_verified_at' => Carbon::now(),
+            ]
+        );
     }
 }
